@@ -258,7 +258,14 @@ public class Employee {
     }
 
     public void displayData() {
-        System.out.printf("Mã nhân viên: %s - Tên nhân viên: %s - Ngày sinh: %s - Email: %s\n", this.empId, this.empName, this.birthOfDate, this.email);
-        System.out.printf("Số điện thoại: %s - Địa chỉ: %s - Trạng thái: %s\n", this.phone, this.address, (this.empStatus == 0 ? "Hoạt động" : (this.empStatus == 1 ? "Nghỉ chế độ" : "Nghỉ việc")));
+        String yellowBold = "\u001B[1;33m";
+        String bold = "\u001B[1m";
+        String reset = "\u001B[0m";
+
+        System.out.println(yellowBold + "+------------------------------------------------------------------------------------------------------------------------------------------------------------+" + reset);
+        System.out.printf("| " + bold + "%-15s | %-20s | %-15s | %-35s | %-15s | %-20s | %-20s |\n", "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Email", "Số điện thoại", "Địa chỉ", "Trạng thái" + reset);
+        System.out.println(yellowBold + "+------------------------------------------------------------------------------------------------------------------------------------------------------------+" + reset);
+        System.out.printf("| " + bold + "%-15s" + reset + " | %-20s | %-15s | %-35s | %-15s | %-20s | %-16s |\n", this.empId, this.empName, this.birthOfDate, this.email, this.phone, this.address, (this.empStatus == 0 ? "Hoạt động" : (this.empStatus == 1 ? "Nghỉ chế độ" : "Nghỉ việc")));
+        System.out.println(yellowBold + "+------------------------------------------------------------------------------------------------------------------------------------------------------------+" + reset);
     }
 }

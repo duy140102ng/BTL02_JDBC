@@ -198,7 +198,14 @@ public class Product {
     }
 
     public void displayData(){
-        System.out.printf("Mã sản phẩm: %s - Tên sản phẩm: %s - Nhà sản xuất: %s\n", this.productId, this.productName, this.manufacturer);
-        System.out.printf("Ngày tạo: %s - Lô: %s - Số lượng: %s - Trạng thái: %s\n" , this.created, this.batch, this.quantity, (this.productStatus == true ? "Hoạt động" : "Không hoạt động"));
+        String yellowBold = "\u001B[1;33m";
+        String bold = "\u001B[1m";
+        String reset = "\u001B[0m";
+
+        System.out.println(yellowBold + "+----------------------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("| %-15s | %-20s | %-20s | %-20s | %-10s | %-10s | %-15s |\n", "Mã sản phẩm", "Tên sản phẩm", "Nhà sản xuất", "Ngày tạo", "Lô", "Số lượng", "Trạng thái");
+        System.out.println("+----------------------------------------------------------------------------------------------------------------------------------+" + reset);
+        System.out.printf("| " + bold + "%-15s" + reset + " | " + bold + "%-20s" + reset + " | " + bold + "%-20s" + reset + " | " + bold + "%-20s" + reset + " | " + bold + "%-10s" + reset + " | " + bold + "%-10d" + reset + " | " + bold + "%-15s" + reset + " |\n", this.productId, this.productName, this.manufacturer, this.created, this.batch, this.quantity, (this.productStatus ? "Hoạt động" : "Không hoạt động"));
+        System.out.println(yellowBold + "+----------------------------------------------------------------------------------------------------------------------------------+");
     }
 }

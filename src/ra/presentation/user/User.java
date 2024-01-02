@@ -204,39 +204,6 @@ public class User {
         return false;
     }
 
-    private static String inputEmpIdAuth(Scanner scanner) {
-        System.out.println("Mời bạn nhập mã nhân viên duyệt: ");
-        do {
-            String empIdAuth = scanner.nextLine();
-            if (!empIdAuth.isEmpty()) {
-                if (checkDuplicateIdAuth(empIdAuth)) {
-                    return empIdAuth;
-                } else {
-                    System.err.println("Mã nhân viên duyệt không tồn tại, vui lòng nhập lại!");
-                }
-            } else {
-                System.err.println("Mã nhân viên duyệt không được để trống, vui lòng nhập lại!");
-            }
-        } while (true);
-    }
-
-    private static boolean checkDuplicateIdAuth(String BillId) {
-        Connection conn = ConnectionDB.openConnection();
-        CallableStatement callSt = null;
-        try {
-            callSt = conn.prepareCall("{call createBillId(?, ?)}");
-            callSt.setString(1, BillId);
-            callSt.registerOutParameter(2, Types.BOOLEAN);
-            callSt.execute();
-            return callSt.getBoolean(2);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            ConnectionDB.closeConnection(conn);
-        }
-        return false;
-    }
-
     private static String inputProductId(Scanner scanner) {
         System.out.println("Mời bạn nhập mã sản phẩm: ");
         do {
@@ -369,6 +336,15 @@ public class User {
         this.productId = inputProductId(scanner);
         this.quantity = inputQuantity(scanner);
         this.price = inputPrice(scanner);
+    }
+
+    public void inputDataIn(Scanner scanner) {
+        this.billCode = inputBillCode(scanner);
+        this.billType = inputBillType(scanner);
+        this.empIdCreated = inputEmpId(scanner);
+        this.productId = inputProductId(scanner);
+        this.quantity = inputQuantityIn(scanner);
+        this.price = inputPriceIn(scanner);
     }
 
     public void inputDataUpdate(Scanner scanner) {

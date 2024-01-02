@@ -56,12 +56,12 @@ public class UserPresentation {
                     }
                     if (billStatus != -1){
                         List<User> userList = userBussiness.findAll();
-                        userList.stream().forEach(user -> user.displayData());
+                        userList.stream().forEach(user -> user.displayDataIn());
                     }
                     break;
                 case 2:
                     User user = new User();
-                    user.inputData(scanner);
+                    user.inputDataIn(scanner);
                     boolean resultCreate = userBussiness.create(user);
                     if (resultCreate) {
                         System.out.println("Tạo phiếu nhập thành công");
@@ -95,7 +95,7 @@ public class UserPresentation {
                         System.out.println("Danh sách phiếu");
                         List<User> listBillId = userBussiness.findById(billIdBrowseBill);
                         if (!listBillId.isEmpty()){
-                            listBillId.forEach(User::displayData);
+                            listBillId.forEach(User::displayDataIn);
                         }else {
                             System.err.println("Không tìm thấy mã phiếu hoặc mã code, vui lòng nhập lại");
                         }
@@ -125,7 +125,7 @@ public class UserPresentation {
                             System.err.println("lựa chọn không hợp lệ, vui lòng nhập lại!");
                     }
                     if (userStatus != -1){
-                        List<User> userList = userBussiness.findAll();
+                        List<User> userList = userBussiness.findAllExportBill();
                         userList.stream().forEach(users -> users.displayData());
                     }
                     break;

@@ -267,9 +267,9 @@ create procedure if not exists update_status_account_by_employee(
     empId char(5)
 )
 begin
-    set @AccountStatus = (select Acc_status from account where Emp_id = empId);
+    set @accountStatus = (select Acc_status from account where Emp_id = empId);
     update account
-    set Acc_status = not @AccountStatus
+    set Acc_status = not @accountStatus
     where Emp_id = empId;
 end &&
 # ---------------Account---------------
@@ -508,8 +508,8 @@ end &&
 delimiter &&
 drop procedure if exists find_receipt;
 create procedure if not exists find_receipt(
-        idPar int,
-        codePar varchar(10)
+    idPar int,
+    codePar varchar(10)
 )
 begin
     select Bill.Bill_id,
@@ -523,11 +523,13 @@ begin
            Bill_Detail.Price
     from Bill
              inner join Bill_Detail on Bill.Bill_id = Bill_Detail.Bill_id
-    where Bill.Bill_Code = codePar or Bill.Bill_id = idPar;
+    where Bill.Bill_Code = codePar
+       or Bill.Bill_id = idPar;
 end &&
 --
 
-select * from Bill;
+select *
+from Bill;
 delimiter &&
 drop procedure if exists get_receipt_by_id;
 create procedure if not exists get_receipt_by_id(
@@ -537,4 +539,13 @@ create procedure if not exists get_receipt_by_id(
 )
 begin
     set cnt_bill = (select count(Bill_id) from Bill where Bill_id = billId or Bill_Code = billCode);
+end &&
+
+
+# -----------------Thống kê--------------------------------
+-- Chi phí theo ngày tháng năm
+create procedure get_date(
+)
+begin
+
 end &&

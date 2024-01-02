@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserBussiness implements IBussiness<User, String> {
-
     @Override
     public List<User> findAll() {
         Connection conn = ConnectionDB.openConnection();
@@ -21,7 +20,7 @@ public class UserBussiness implements IBussiness<User, String> {
             userList = new ArrayList<>();
             while (rs.next()) {
                 boolean billType = rs.getBoolean("Bill_Type");
-                if (billType == true){
+                if (billType){
                     User user = new User();
                     user.setBillId(rs.getLong("Bill_id"));
                     user.setBillCode(rs.getString("Bill_Code"));
@@ -44,6 +43,41 @@ public class UserBussiness implements IBussiness<User, String> {
         }
         return userList;
     }
+
+    public List<User> findAllExportBill() {
+        Connection conn = ConnectionDB.openConnection();
+        CallableStatement callSt = null;
+        List<User> userList = null;
+        try {
+            callSt = conn.prepareCall("{call get_all_receipt()}");
+            ResultSet rs = callSt.executeQuery();
+            userList = new ArrayList<>();
+            while (rs.next()) {
+                boolean billType = rs.getBoolean("Bill_Type");
+                if (!billType){
+                    User user = new User();
+                    user.setBillId(rs.getLong("Bill_id"));
+                    user.setBillCode(rs.getString("Bill_Code"));
+                    user.setBillType(billType);
+                    user.setEmpIdCreated(rs.getString("Emp_id_created"));
+                    user.setCreated(rs.getDate("Created"));
+                    user.setProductId(rs.getString("Product_Id"));
+                    user.setQuantity(rs.getInt("Quantity"));
+                    user.setPrice(rs.getFloat("Price"));
+                    user.setBillStatus(rs.getInt("Bill_Status"));
+                    userList.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionDB.closeConnection(conn);
+        }
+        return userList;
+    }
+
 
     @Override
     public boolean create(User user) {

@@ -20,7 +20,7 @@ public class BillBussiness implements IBussiness<Bill, String> {
             billList = new ArrayList<>();
             while (rs.next()) {
                 boolean billType = rs.getBoolean("Bill_Type");
-                if (billType == false){
+                if (!billType){
                     Bill bill = new Bill();
                     bill.setBillId(rs.getLong("Bill_id"));
                     bill.setBillCode(rs.getString("Bill_Code"));
@@ -241,17 +241,20 @@ public class BillBussiness implements IBussiness<Bill, String> {
             ResultSet rs = callSt.executeQuery();
             listBill = new ArrayList<>();
             while (rs.next()) {
-                Bill bill = new Bill();
-                bill.setBillId(rs.getLong("Bill_id"));
-                bill.setBillCode(rs.getString("Bill_Code"));
-                bill.setBillType(rs.getBoolean("Bill_Type"));
-                bill.setEmpIdCreated(rs.getString("Emp_id_created"));
-                bill.setCreated(rs.getDate("Created"));
-                bill.setProductId(rs.getString("Product_Id"));
-                bill.setQuantity(rs.getInt("Quantity"));
-                bill.setPrice(rs.getFloat("Price"));
-                bill.setBillStatus(rs.getInt("Bill_Status"));
-                listBill.add(bill);
+                boolean billType = rs.getBoolean("Bill_Type");
+                if (!billType){
+                    Bill bill = new Bill();
+                    bill.setBillId(rs.getLong("Bill_id"));
+                    bill.setBillCode(rs.getString("Bill_Code"));
+                    bill.setBillType(billType);
+                    bill.setEmpIdCreated(rs.getString("Emp_id_created"));
+                    bill.setCreated(rs.getDate("Created"));
+                    bill.setProductId(rs.getString("Product_Id"));
+                    bill.setQuantity(rs.getInt("Quantity"));
+                    bill.setPrice(rs.getFloat("Price"));
+                    bill.setBillStatus(rs.getInt("Bill_Status"));
+                    listBill.add(bill);
+                }
             }
             return listBill;
         } catch (SQLException e) {

@@ -19,17 +19,20 @@ public class ReceiptBussiness implements IBussiness<Receipt, String> {
             ResultSet rs = callSt.executeQuery();
             receiptList = new ArrayList<>();
             while (rs.next()) {
-                Receipt receipt = new Receipt();
-                receipt.setBillId(rs.getLong("Bill_id"));
-                receipt.setBillCode(rs.getString("Bill_Code"));
-                receipt.setBillType(rs.getBoolean("Bill_Type"));
-                receipt.setEmpIdCreated(rs.getString("Emp_id_created"));
-                receipt.setCreated(rs.getDate("Created"));
-                receipt.setProductId(rs.getString("Product_Id"));
-                receipt.setQuantity(rs.getInt("Quantity"));
-                receipt.setPrice(rs.getFloat("Price"));
-                receipt.setBillStatus(rs.getInt("Bill_Status"));
-                receiptList.add(receipt);
+                boolean billType = rs.getBoolean("Bill_Type");
+                if (billType){
+                    Receipt receipt = new Receipt();
+                    receipt.setBillId(rs.getLong("Bill_id"));
+                    receipt.setBillCode(rs.getString("Bill_Code"));
+                    receipt.setBillType(billType);
+                    receipt.setEmpIdCreated(rs.getString("Emp_id_created"));
+                    receipt.setCreated(rs.getDate("Created"));
+                    receipt.setProductId(rs.getString("Product_Id"));
+                    receipt.setQuantity(rs.getInt("Quantity"));
+                    receipt.setPrice(rs.getFloat("Price"));
+                    receipt.setBillStatus(rs.getInt("Bill_Status"));
+                    receiptList.add(receipt);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -239,7 +242,7 @@ public class ReceiptBussiness implements IBussiness<Receipt, String> {
             listReceipt = new ArrayList<>();
             while (rs.next()) {
                 boolean billType = rs.getBoolean("Bill_Type");
-                if (billType == true){
+                if (billType){
                     Receipt receipt = new Receipt();
                     receipt.setBillId(rs.getLong("Bill_id"));
                     receipt.setBillCode(rs.getString("Bill_Code"));
