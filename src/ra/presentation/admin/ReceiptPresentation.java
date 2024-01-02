@@ -18,14 +18,22 @@ public class ReceiptPresentation {
         int choice = 0;
         boolean isExit = true;
         do {
-            System.out.println("******************RECEIPT MANAGEMENT****************\n" +
-                    "1. Danh sách phiếu nhập\n" +
-                    "2. Tạo phiếu nhập\n" +
-                    "3. Cập nhật thông tin phiếu nhập\n" +
-                    "4. Chi tiết phiếu nhập\n" +
-                    "5. Duyệt phiếu nhập\n" +
-                    "6. Tìm kiếm phiếu nhập\n" +
-                    "7. Thoát");
+            String blackBold = "\033[1;30m";
+            String cyanText = "\033[1;36m";
+            String reset = "\u001B[0m";
+
+            System.out.println(blackBold + cyanText + "+------------------------------------------------------+");
+            System.out.println(blackBold + cyanText + "|                   RECEIPT MANAGEMENT                 |" + reset);
+            System.out.println(blackBold + cyanText + "|                                                      |" + reset);
+            System.out.println(blackBold + cyanText + "|   1. Danh sách phiếu nhập                            |" + reset);
+            System.out.println(blackBold + cyanText + "|   2. Tạo phiếu nhập                                  |" + reset);
+            System.out.println(blackBold + cyanText + "|   3. Cập nhật thông tin phiếu nhập                   |" + reset);
+            System.out.println(blackBold + cyanText + "|   4. Chi tiết phiếu nhập                             |" + reset);
+            System.out.println(blackBold + cyanText + "|   5. Duyệt phiếu nhập                                |" + reset);
+            System.out.println(blackBold + cyanText + "|   6. Tìm kiếm phiếu nhập                             |" + reset);
+            System.out.println(blackBold + cyanText + "|   7. Thoát                                           |" + reset);
+            System.out.println(blackBold + cyanText + "|                                                      |" + reset);
+            System.out.println(blackBold + cyanText + "+------------------------------------------------------+");
             try {
                 System.out.println("Lựa chọn của bạn: ");
                 choice = Integer.parseInt(scanner.nextLine());
@@ -96,7 +104,7 @@ public class ReceiptPresentation {
                         System.out.println("Danh sách phiếu");
                         List<Receipt> listReceiptId = receiptBussiness.findById(receiptIdBrowseBill);
                         if (!listReceiptId.isEmpty()){
-                            listReceiptId.forEach(Receipt::displayData);
+                            listReceiptId.forEach(receipt1 -> receipt1.displayData());
                         }else {
                             System.err.println("Không tìm thấy mã phiếu hoặc mã code, vui lòng nhập lại");
                         }

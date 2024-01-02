@@ -17,13 +17,21 @@ public class ProductPesentation {
         int choice = 0;
         boolean isExit = true;
         do {
-            System.out.println("******************PRODUCT MANAGEMENT****************\n" +
-                    "1. Danh sách sản phẩm\n" +
-                    "2. Thêm mới sản phẩm\n" +
-                    "3. Cập nhật sản phẩm\n" +
-                    "4. Tìm kiếm sản phẩm\n" +
-                    "5. Cập nhật trạng thái sản phẩm\n" +
-                    "6. Thoát");
+            String blackBold = "\033[1;30m";
+            String blueText = "\033[1;34m";
+            String reset = "\u001B[0m";
+
+            System.out.println(blackBold + blueText + "+------------------------------------------------------+" + reset);
+            System.out.println(blackBold + blueText + "|                    PRODUCT MANAGEMENT                |" + reset);
+            System.out.println(blackBold + blueText + "|                                                      |" + reset);
+            System.out.println(blackBold + blueText + "|   1. Danh sách sản phẩm                              |" + reset);
+            System.out.println(blackBold + blueText + "|   2. Thêm mới sản phẩm                               |" + reset);
+            System.out.println(blackBold + blueText + "|   3. Cập nhật sản phẩm                               |" + reset);
+            System.out.println(blackBold + blueText + "|   4. Tìm kiếm sản phẩm                               |" + reset);
+            System.out.println(blackBold + blueText + "|   5. Cập nhật trạng thái sản phẩm                    |" + reset);
+            System.out.println(blackBold + blueText + "|   6. Thoát                                           |" + reset);
+            System.out.println(blackBold + blueText + "|                                                      |" + reset);
+            System.out.println(blackBold + blueText + "+------------------------------------------------------+" + reset);
             try {
                 System.out.println("Lựa chọn của bạn: ");
                 choice = Integer.parseInt(scanner.nextLine());

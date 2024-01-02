@@ -16,14 +16,22 @@ public class BillPrensentation {
         int choice = 0;
         boolean isExit = true;
         do {
-            System.out.println("******************BILL MANAGEMENT****************\n" +
-                    "1. Danh sách phiếu xuất\n" +
-                    "2. Tạo phiếu xuất\n" +
-                    "3. Cập nhật thông tin phiếu xuất\n" +
-                    "4. Chi tiết phiếu xuất\n" +
-                    "5. Duyệt phiếu xuất\n" +
-                    "6. Tìm kiếm phiếu xuất\n" +
-                    "7. Thoát");
+            String blackBold = "\033[1;30m";
+            String purpleText = "\033[1;35m";
+            String reset = "\u001B[0m";
+
+            System.out.println(blackBold + purpleText + "+------------------------------------------------------+");
+            System.out.println(blackBold + purpleText + "|                      BILL MANAGEMENT                 |" + reset);
+            System.out.println(blackBold + purpleText + "|                                                      |" + reset);
+            System.out.println(blackBold + purpleText + "|   1. Danh sách phiếu xuất                            |" + reset);
+            System.out.println(blackBold + purpleText + "|   2. Tạo phiếu xuất                                  |" + reset);
+            System.out.println(blackBold + purpleText + "|   3. Cập nhật thông tin phiếu xuất                   |" + reset);
+            System.out.println(blackBold + purpleText + "|   4. Chi tiết phiếu xuất                             |" + reset);
+            System.out.println(blackBold + purpleText + "|   5. Duyệt phiếu xuất                                |" + reset);
+            System.out.println(blackBold + purpleText + "|   6. Tìm kiếm phiếu xuất                             |" + reset);
+            System.out.println(blackBold + purpleText + "|   7. Thoát                                           |" + reset);
+            System.out.println(blackBold + purpleText + "|                                                      |" + reset);
+            System.out.println(blackBold + purpleText + "+------------------------------------------------------+");
             try {
                 System.out.println("Lựa chọn của bạn: ");
                 choice = Integer.parseInt(scanner.nextLine());

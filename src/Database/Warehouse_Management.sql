@@ -42,6 +42,8 @@ create table Bill
     Auth_date      date                 default (current_date()),
     Bill_Status    smallint    not null default 0
 );
+
+
 drop table Bill;
 create table Bill_Detail
 (
@@ -250,16 +252,24 @@ end &&
 delimiter &&
 drop procedure if exists update_status_employee;
 create procedure if not exists update_status_employee(
+    empId char(5),
+    empStatus smallint
+)
+begin
+    update Employee
+    set Emp_Status = empStatus
+    where Emp_id = empId;
+end &&
+
+delimiter &&
+drop procedure if exists update_status_account_by_employee;
+create procedure if not exists update_status_account_by_employee(
     empId char(5)
 )
 begin
-    set @current_status = (select Emp_Status from Employee where Emp_id = empId);
-    update Employee
-    set Emp_Status = case
-                         when @current_status = 0 then 1
-                         when @current_status = 1 then 2
-                         when @current_status = 2 then 0
-        end
+    set @AccountStatus = (select Acc_status from account where Emp_id = empId);
+    update account
+    set Acc_status = not @AccountStatus
     where Emp_id = empId;
 end &&
 # ---------------Account---------------
@@ -406,6 +416,8 @@ end &&
 -- Duyệt phiếu
 delimiter &&
 drop procedure if exists browse_bill;
+
+
 create procedure if not exists browse_bill(
 )
 begin
@@ -492,7 +504,30 @@ begin
         Price      = prices
     where Bill_id = billId;
 end &&
+-- Tìm kiếm theo Id
+delimiter &&
+drop procedure if exists find_receipt;
+create procedure if not exists find_receipt(
+        idPar int,
+        codePar varchar(10)
+)
+begin
+    select Bill.Bill_id,
+           Bill.Bill_Code,
+           Bill.Bill_Type,
+           Bill.Emp_id_created,
+           Bill.Created,
+           Bill.Bill_Status,
+           Bill_Detail.Product_Id,
+           Bill_Detail.Quantity,
+           Bill_Detail.Price
+    from Bill
+             inner join Bill_Detail on Bill.Bill_id = Bill_Detail.Bill_id
+    where Bill.Bill_Code = codePar or Bill.Bill_id = idPar;
+end &&
 --
+
+select * from Bill;
 delimiter &&
 drop procedure if exists get_receipt_by_id;
 create procedure if not exists get_receipt_by_id(

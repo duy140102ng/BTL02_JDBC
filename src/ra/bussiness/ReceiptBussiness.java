@@ -232,29 +232,25 @@ public class ReceiptBussiness implements IBussiness<Receipt, String> {
         CallableStatement callSt = null;
         List<Receipt> listReceipt = null;
         try {
-            callSt = conn.prepareCall("{call get_receipt_by_id(?, ?, ?)}");
+            callSt = conn.prepareCall("{call find_receipt(?, ?)}");
             callSt.setLong(1, billId);
             callSt.setString(2, billCode);
-            callSt.registerOutParameter(3, Types.INTEGER);
-            boolean result = callSt.execute();
-            if (result) {
-                int cnt_receipt = callSt.getInt(3);
-                if (cnt_receipt > 0) {
-                    ResultSet rs = callSt.getResultSet();
-                    listReceipt = new ArrayList<>();
-                    while (rs.next()) {
-                        Receipt receipt = new Receipt();
-                        receipt.setBillId(rs.getLong("Bill_id"));
-                        receipt.setBillCode(rs.getString("Bill_Code"));
-                        receipt.setBillType(rs.getBoolean("Bill_Type"));
-                        receipt.setEmpIdAuth(rs.getString("Emp_id_auth"));
-                        receipt.setAuthDate(rs.getDate("Auth_date"));
-                        receipt.setProductId(rs.getString("Product_Id"));
-                        receipt.setQuantity(rs.getInt("Quantity"));
-                        receipt.setPrice(rs.getFloat("Price"));
-                        receipt.setBillStatus(rs.getInt("Bill_Status"));
-                        listReceipt.add(receipt);
-                    }
+            ResultSet rs = callSt.executeQuery();
+            listReceipt = new ArrayList<>();
+            while (rs.next()) {
+                boolean billType = rs.getBoolean("Bill_Type");
+                if (billType == true){
+                    Receipt receipt = new Receipt();
+                    receipt.setBillId(rs.getLong("Bill_id"));
+                    receipt.setBillCode(rs.getString("Bill_Code"));
+                    receipt.setBillType(billType);
+                    receipt.setEmpIdCreated(rs.getString("Emp_id_created"));
+                    receipt.setCreated(rs.getDate("Created"));
+                    receipt.setProductId(rs.getString("Product_Id"));
+                    receipt.setQuantity(rs.getInt("Quantity"));
+                    receipt.setPrice(rs.getFloat("Price"));
+                    receipt.setBillStatus(rs.getInt("Bill_Status"));
+                    listReceipt.add(receipt);
                 }
             }
             return listReceipt;

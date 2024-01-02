@@ -140,9 +140,8 @@ public class EmployeeBussiness implements IBussiness<Employee, String> {
                 callSt2.setShort(2, employee.getEmpStatus());
                 callSt2.executeUpdate();
                 if (employee.getEmpStatus() != null && (employee.getEmpStatus() == 1) || employee.getEmpStatus() == 2){
-                    callSt3 = conn.prepareCall("{call update_status_account(?,?)}");
+                    callSt3 = conn.prepareCall("{call update_status_account_by_employee(?)}");
                     callSt3.setString(1, employee.getEmpId());
-                    callSt3.setString(2, "Block");
                     callSt3.executeUpdate();
                 }
                 conn.commit();

@@ -172,8 +172,11 @@ public class Account {
     }
 
     public void displayData() {
-        System.out.printf("Mã tài khoản: %d - Tên tài khoản: %s - Mật khẩu: %s\n", this.accId, this.userName, this.password);
-        System.out.printf("Quyền tài khoản: %s - Mã nhân viên: %s - Trạng thái: %s\n", (this.permission == true ? "User" : "Admin"), this.empId, (this.accStatus == true ? "Active" : "Block"));
+        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("| %-15s | %-20s | %-20s | %-15s | %-15s | %-15s |\n", "Mã tài khoản", "Tên tài khoản", "Mật khẩu", "Quyền tài khoản", "Mã nhân viên", "Trạng thái");
+        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
+        System.out.printf("| %-15d | %-20s | %-20s | %-15s | %-15s | %-15s |\n", this.accId, this.userName, this.password, (this.permission ? "User" : "Admin"), this.empId, (this.accStatus ? "Active" : "Block"));
+        System.out.println("+---------------------------------------------------------------------------------------------------------------------+");
     }
 
     public static void writeDataToFile(List<Account> accountList) {

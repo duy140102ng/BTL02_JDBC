@@ -18,13 +18,21 @@ public class EmployeePresentation {
         int choice = 0;
         boolean isExit = true;
         do {
-            System.out.println("******************EMPLOYEE MANAGEMENT****************\n" +
-                    "1. Danh sách nhân viên\n" +
-                    "2. Thêm mới nhân viên\n" +
-                    "3. Cập nhật thông tin nhân viên\n" +
-                    "4. Cập nhật trạng thái nhân viên\n" +
-                    "5. Tìm kiếm nhân viên\n" +
-                    "6. Thoát");
+            String blackBold = "\033[1;30m";
+            String greenText = "\033[1;32m";
+            String reset = "\u001B[0m";
+
+            System.out.println(blackBold + greenText + "+------------------------------------------------------+");
+            System.out.println(blackBold + greenText + "|                     EMPLOYEE MANAGEMENT              |" + reset);
+            System.out.println(blackBold + greenText + "|                                                      |" + reset);
+            System.out.println(blackBold + greenText + "|   1. Danh sách nhân viên                             |" + reset);
+            System.out.println(blackBold + greenText + "|   2. Thêm mới nhân viên                              |" + reset);
+            System.out.println(blackBold + greenText + "|   3. Cập nhật thông tin nhân viên                    |" + reset);
+            System.out.println(blackBold + greenText + "|   4. Cập nhật trạng thái nhân viên                   |" + reset);
+            System.out.println(blackBold + greenText + "|   5. Tìm kiếm nhân viên                              |" + reset);
+            System.out.println(blackBold + greenText + "|   6. Thoát                                           |" + reset);
+            System.out.println(blackBold + greenText + "|                                                      |" + reset);
+            System.out.println(blackBold + greenText + "+------------------------------------------------------+");
             System.out.println("Lựa chọn của bạn: ");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
@@ -70,6 +78,7 @@ public class EmployeePresentation {
                             return;
                         }
                         Employee empUpdate = new Employee();
+                        empUpdate.setEmpId(empId);
                         switch (choice) {
                             case 0:
                                 empUpdate.setEmpStatus((short) 0);

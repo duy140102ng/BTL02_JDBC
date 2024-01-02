@@ -19,12 +19,21 @@ public class AccountPresentation {
         int choice = 0;
         boolean isExit = true;
         do {
-            System.out.println("******************ACCOUNT MANAGEMENT****************\n" +
-                    "1. Danh sách tài khoản\n" +
-                    "2. Tạo tài khoản mới\n" +
-                    "3. Cập nhật trạng thái tài khoản\n" +
-                    "4. Tìm kiếm tài khoản\n" +
-                    "5. Thoát");
+            String blackBold = "\033[1;30m";
+            String magentaText = "\033[1;35m";
+            String reset = "\u001B[0m";
+
+            System.out.println(blackBold + magentaText + "+------------------------------------------------------+");
+            System.out.println(blackBold + magentaText + "|                    ACCOUNT MANAGEMENT                |" + reset);
+            System.out.println(blackBold + magentaText + "|                                                      |" + reset);
+            System.out.println(blackBold + magentaText + "|   1. Danh sách tài khoản                             |" + reset);
+            System.out.println(blackBold + magentaText + "|   2. Tạo tài khoản mới                               |" + reset);
+            System.out.println(blackBold + magentaText + "|   3. Cập nhật trạng thái tài khoản                   |" + reset);
+            System.out.println(blackBold + magentaText + "|   4. Tìm kiếm tài khoản                              |" + reset);
+            System.out.println(blackBold + magentaText + "|   5. Thoát                                           |" + reset);
+            System.out.println(blackBold + magentaText + "|                                                      |" + reset);
+            System.out.println(blackBold + magentaText + "+------------------------------------------------------+");
+
             System.out.println("Lụa chọn của bạn: ");
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
